@@ -10,15 +10,20 @@
 void mop_push(stack_t **stack, unsigned int n_line)
 {
 	stack_t *node;
-	char del[] = " \n\t";
+	char delim[] = " \n\t";
 	char *s;
-	int num, flag;
+	int num, flag, sign = 1;
 
-	s = strtok(NULL, del);
+	s = strtok(NULL, delim);
 	if (!s)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
+	}
+	if (*s == '-')
+	{
+		sign = -1;
+		s++;
 	}
 	flag = _isdigit(s);
 	if (flag == 0)
@@ -26,7 +31,7 @@ void mop_push(stack_t **stack, unsigned int n_line)
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
 	}
-	num = atoi(s);
+	num = atoi(s) * sign;
 	node = malloc(sizeof(stack_t));
 	if (!node)
 	{
@@ -39,7 +44,6 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	if (*stack)
 		(*stack)->prev = node;
 	*stack = node;
-	free(node);
 }
 /**
  * mop_pall - prints all the values on the stack
