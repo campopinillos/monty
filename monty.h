@@ -2,13 +2,9 @@
 #define MONTY_H
 
 #include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -37,13 +33,17 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+        void (*f)(stack_t **stack, unsigned int n_line);
 } instruction_t;
 
-
+/* Main Functions */
 void read_file(FILE *fd, char *file_name);
 void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line);
-void mop_pall(stack_t **dlinkedlist, unsigned int line_num);
-size_t print_dlistint(const dlistint_t *h);
+
+/* Opcode Functions */
+void mop_push(stack_t **stack, unsigned int n_line);
+void mop_pall(stack_t **stack, unsigned int n_line);
+
+/* Aux Functions */
 
 #endif

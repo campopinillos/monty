@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	read_file(fd, argv[1]);
+	fclose(fd);
 	return (EXIT_SUCCESS);
 }
 /**
@@ -44,7 +45,7 @@ int main(int argc, char **argv)
  */
 void read_file(FILE *fd, char *file_name)
 {
-	int n_line = 1, i = 0;
+	int n_line = 1;
 	size_t size_buf = 1;
 	char *buffer = NULL, *delim = " \t\n", *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
@@ -55,7 +56,7 @@ void read_file(FILE *fd, char *file_name)
 		fprintf(stderr, "Error: Can't open file %s\n", file_name);
 		exit(EXIT_FAILURE);
 	}
-	while (getline(&buffer, &size_buf, fd) != EOF)
+	for (;getline(&buffer, &size_buf, fd) != EOF; n_line++)
 	{
 		opcode = strtok(buffer, delim);
 		f = opcode_func(opcode);
@@ -65,7 +66,6 @@ void read_file(FILE *fd, char *file_name)
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
-		n_line++;
 	}
 	free(buffer);
 }
@@ -80,16 +80,20 @@ void read_file(FILE *fd, char *file_name)
  */
 void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 {
-	instruction_t opcodes[] = {
+	instruction_t opc[] = {
+		{"push", mop_push},
 		{"pall", mop_pall},
 		{NULL, NULL}
 	};
-	int i = 0;
+	int i = 0, j = 0;
 
-	while (opcodes[i].opcode)
+	while (opc[i].opcode && s)
 	{
-		if (opcodes[i].opcode[0] == s[0] && s[0] != '\0')
-			return (opcodes[i].f);
+		
+		for (j = 0; opc[i].opcode[j] == s[j] && s[j]; j++)
+			;
+		if (!opc[i].opcode[j] && !s[j])
+			return (opc[i].f);
 		i++;
 	}
 	return (NULL);
