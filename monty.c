@@ -84,12 +84,13 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 	instruction_t opc[] = {
 		{"push", mop_push},
 		{"pall", mop_pall},
+		{"nop", mop_nop},
 		{NULL, NULL}
 	};
 	int i = 0;
 
 	for (; opc[i].opcode; i++)
-	{	
+	{
 		if (strcmp(s, opc[i].opcode) == 0)
 			return (opc[i].f);
 	}
