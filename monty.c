@@ -42,9 +42,11 @@ int main(int argc, char **argv)
  */
 void read_file(FILE *fd, char *file_name)
 {
-	int num_line = 1, i = 0;
-	char *buffer = NULL, *delim = " \t\n", *opcode, *value;
+	int n_line = 1, i = 0;
 	size_t size_buf = 1;
+	char *buffer = NULL, *delim = " \t\n", *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
+	stack_t *stack;
 
 	if (!fd)
 	{
@@ -54,8 +56,36 @@ void read_file(FILE *fd, char *file_name)
 	while (getline(&buffer, &size_buf, fd) != EOF)
 	{
 		opcode = strtok(buffer, delim);
-		value = strtok(NULL, delim);
-		num_line++;
+		f = opcode_func(opcode);
+		if (!f)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
+			exit (EXIT_FAILURE);
+		}
+		f(&stack, n_line);
+		n_line++;
 	}
 	free(buffer);
+}
+
+void (*opcode_func(char *s))(stack_t **, unsigned int n_line)
+{
+	int i = 0, j = 0;
+	instruction_t opcodes[] = {
+		{"push", op_push}, {"pall", op_pall}, {"pint", op_pint},
+		{"pop", op_pop}, {"swap", op_swap}, {"add", op_add},
+		{"nop", op_nop}, {NULL, NULL}
+	};
+	while(opcodes[i].opcode && s)
+	{
+		j = 0;
+		while (opcodes[i].opcode[j] == s[j] && s[j])
+			j++;
+		if (!opcodes[i].opcode[j] && !s[j])
+		{
+			return (opcodes[i].f);
+		}
+		i++;
+	}
+	return (NULL);
 }
