@@ -43,6 +43,7 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line);
 /* Opcode Functions */
 void mop_push(stack_t **stack, unsigned int n_line);
 void mop_pall(stack_t **stack, unsigned int n_line);
+void mop_pint(stack_t **stack, unsigned int n_line);
 void mop_nop(stack_t **stack, unsigned int n_line);
 
 /* Aux Functions */

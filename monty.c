@@ -84,6 +84,7 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 	instruction_t opc[] = {
 		{"push", mop_push},
 		{"pall", mop_pall},
+		{"pint", mop_pint},
 		{"nop", mop_nop},
 		{NULL, NULL}
 	};

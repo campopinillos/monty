@@ -4,15 +4,16 @@
  * @c: The evaluated input
  *
  * Description: Determine if is it a number between 0 and 9
- * Return: 0 Value if it works
+ * Return: 1 if it is a number 0 if is not
  */
 int _isdigit(char *c)
 {
 	int num;
 
-	num = atoi(c);
-	if (num >= 48 && num <= 57)
+	if (*c == 48)
 		return (1);
-	else
+	num = atoi(c);
+	if (num == 0)
 		return (0);
+	return (1);
 }

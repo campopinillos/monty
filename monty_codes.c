@@ -10,32 +10,30 @@
 void mop_push(stack_t **stack, unsigned int n_line)
 {
 	stack_t *node;
-	char del[] = " ";
+	char del[] = " \n\t";
 	char *s;
-	int n;
+	int num, flag = 0;
 
-	node = malloc(sizeof(stack_t));
-	if (!node)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
 	s = strtok(NULL, del);
 	if (!s)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
 	}
-	if (*s != 48)
-		n = atoi(s);
-	if (n == 0)
+	flag = _isdigit(s);
+	if (flag == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
 	}
-	if (*s == 48)
-		n = 0;
-	node->n = n;
+	num = atoi(s);
+	node = malloc(sizeof(stack_t));
+	if (!node)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	node->n = num;
 	node->next = *stack;
 	node->prev = NULL;
 	if (*stack)
@@ -65,3 +63,34 @@ void mop_pall(stack_t **stack, unsigned int n_line)
 	}
 }
 
+/**
+ * mop_pint - prints the value at the top
+ * @stack: Double pointer input
+ * @n_line: line number
+ *
+ * Description: prints the value at the top of the stack.
+ * Return: Nothing.
+ */
+void mop_pint(stack_t **stack, unsigned int n_line)
+{
+	stack_t *tmp = *stack;
+	(void) n_line;
+
+	if (!stack || !*stack)
+		return;
+		printf("%i\n", tmp->n);
+}
+
+/**
+ * mop_nop - Doesn’t do anything
+ * @stack: Double pointer input
+ * @n_line: line number
+ *
+ * Description: Doesn’t do anything.
+ * Return: Nothing.
+ */
+void mop_nop(stack_t **stack, unsigned int n_line)
+{
+	(void) **stack;
+	(void) n_line;
+}
