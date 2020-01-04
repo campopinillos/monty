@@ -85,16 +85,12 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		{"pall", mop_pall},
 		{NULL, NULL}
 	};
-	int i = 0, j = 0;
+	int i = 0;
 
-	while (opc[i].opcode && s)
-	{
-		
-		for (j = 0; opc[i].opcode[j] == s[j] && s[j]; j++)
-			;
-		if (!opc[i].opcode[j] && !s[j])
+	for (; opc[i].opcode; i++)
+	{	
+		if (strcmp(s, opc[i].opcode) == 0)
 			return (opc[i].f);
-		i++;
 	}
 	return (NULL);
 }
