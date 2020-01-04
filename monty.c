@@ -63,6 +63,7 @@ void read_file(FILE *fd, char *file_name)
 		if (!f)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
