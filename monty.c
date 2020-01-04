@@ -49,14 +49,14 @@ void read_file(FILE *fd, char *file_name)
 	size_t size_buf = 1;
 	char *buffer = NULL, *delim = " \t\n", *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
-	stack_t *stack;
+	stack_t *stack = NULL;
 
 	if (!fd)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file_name);
 		exit(EXIT_FAILURE);
 	}
-	for (;getline(&buffer, &size_buf, fd) != EOF; n_line++)
+	while (getline(&buffer, &size_buf, fd) != EOF)
 	{
 		opcode = strtok(buffer, delim);
 		f = opcode_func(opcode);
@@ -66,6 +66,7 @@ void read_file(FILE *fd, char *file_name)
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
+		n_line++;
 	}
 	free(buffer);
 }
