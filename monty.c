@@ -97,5 +97,5 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		if (strcmp(s, opc[i].opcode) == 0)
 			return (opc[i].f);
 	}
-	return (NULL);
+	return (0);
 }
