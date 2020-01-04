@@ -45,8 +45,9 @@ void mop_push(stack_t **stack, unsigned int n_line);
 void mop_pall(stack_t **stack, unsigned int n_line);
 void mop_pint(stack_t **stack, unsigned int n_line);
 void mop_nop(stack_t **stack, unsigned int n_line);
+void mop_pop(stack_t **dlinkedlist, unsigned int line_num);
 
 /* Aux Functions */
 int _isdigit(char *c);
-
+void rm_head(stack_t **head);
 #endif
