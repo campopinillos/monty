@@ -59,8 +59,11 @@ void read_file(FILE *fd, char *file_name)
 	while (getline(&buffer, &size_buf, fd) != EOF)
 	{
 		opcode = strtok(buffer, delim);
-		if	(!opcode)
+		if (!opcode)
+		{
+			n_line++;
 			continue;
+		}
 		f = opcode_func(opcode);
 		if (!f)
 		{
