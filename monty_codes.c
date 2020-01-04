@@ -81,7 +81,13 @@ void mop_pint(stack_t **stack, unsigned int n_line)
 	stack_t *tmp = *stack;
 	(void) n_line;
 
-	if (!stack || !*stack)
+	if (tmp == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", n_line);
+		exit(EXIT_FAILURE);
+	}
+
+	else if (!stack || !*stack)
 		return;
 		printf("%i\n", tmp->n);
 }
