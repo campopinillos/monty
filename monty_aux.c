@@ -1,0 +1,19 @@
+#include "monty.h"
+/**
+ * _isdigit - Determine if is it a number
+ * @c: The evaluated input
+ *
+ * Description: Determine if is it a number between 0 and 9
+ * Return: 1 if it is a number 0 if is not
+ */
+int _isdigit(char *c)
+{
+	int num;
+
+	if (*c == 48)
+		return (1);
+	num = atoi(c);
+	if (num == 0)
+		return (0);
+	return (1);
+}
