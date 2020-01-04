@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	}
 	read_file(fd, argv[1]);
 	fclose(fd);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 /**
  * read_file - Read and get the command

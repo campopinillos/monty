@@ -1,11 +1,13 @@
 #ifndef MONTY_H
 #define MONTY_H
-#define EXIT_FAILURE
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+/* Global */
+FILE *fd;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -22,6 +24,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
 
 /**
  * struct instruction_s - opcode and its function
