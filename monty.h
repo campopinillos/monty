@@ -43,5 +43,6 @@ typedef struct instruction_s
 
 void read_file(FILE *fd, char *file_name);
 void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line);
+void mop_pall(stack_t **dlinkedlist, unsigned int line_num);
 
 #endif

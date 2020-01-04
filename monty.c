@@ -81,7 +81,7 @@ void read_file(FILE *fd, char *file_name)
 void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 {
 	instruction_t opcodes[] = {
-		{"pall", op_pall},
+		{"pall", mop_pall},
 		{NULL, NULL}
 	};
 	int i = 0;
