@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	}
 	read_file(fd, argv[1]);
 	fclose(fd);
-	return (EXIT_SUCCESS);
+	return (0);
 }
 /**
  * read_file - Read and get the command
@@ -59,6 +59,8 @@ void read_file(FILE *fd, char *file_name)
 	while (getline(&buffer, &size_buf, fd) != EOF)
 	{
 		opcode = strtok(buffer, delim);
+		if	(!opcode)
+			continue;
 		f = opcode_func(opcode);
 		if (!f)
 		{
@@ -97,5 +99,5 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		if (strcmp(s, opc[i].opcode) == 0)
 			return (opc[i].f);
 	}
-	return 0;
+	return (NULL);
 }
