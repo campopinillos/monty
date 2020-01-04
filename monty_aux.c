@@ -6,14 +6,14 @@
  * Description: Determine if is it a number between 0 and 9
  * Return: 1 if it is a number 0 if is not
  */
-int _isdigit(char *c)
+int _isdigit(char *str)
 {
-	int num;
+	int i;
 
-	if (*c == 48)
-		return (1);
-	num = atoi(c);
-	if (num == 0)
-		return (0);
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] < 48 || str[i] > 57)
+			return (0);
+	}
 	return (1);
 }
