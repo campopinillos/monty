@@ -1,23 +1,25 @@
 #include "monty.h"
 /**
  * main - Get the bytecodes
- * @argc: Number of arguments.
- * @argv: Double pointer of arguments.
- * 
- * Description: Entry point for the Monty 
- * program interpreter
+ * @argc: Number of arguments
+ * @argv: Double pointer of arguments
+ *
+ * Description: Entry point for the Monty
+ * program interpreter.
  * Return: 0 if success.
  */
 int main(int argc, char **argv)
 {
 	int check_access;
 	FILE *fd;
-	if (argc < 2 || argc > 2)
+
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	if ((check_access = access(argv[1], R_OK)) == -1)
+	check_access = access(argv[1], R_OK);
+	if (check_access == -1)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
@@ -32,12 +34,12 @@ int main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 /**
- * read - Read and get the command
- * @fd: Number of arguments.
- * @file_name: File name.
- * 
- * Description: Read and get the command 
- * for the program interpreter
+ * read_file - Read and get the command
+ * @fd: Number of arguments
+ * @file_name: File name
+ *
+ * Description: Read and get the command
+ * for the program interpreter.
  * Return: Nothing.
  */
 void read_file(FILE *fd, char *file_name)
@@ -60,7 +62,7 @@ void read_file(FILE *fd, char *file_name)
 		if (!f)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
 		n_line++;
@@ -68,23 +70,26 @@ void read_file(FILE *fd, char *file_name)
 	free(buffer);
 }
 
-void (*opcode_func(char *s))(stack_t **, unsigned int n_line)
+/**
+ * opcode_func - Get the opcode function
+ * @s: String input
+ *
+ * Description: This function validates the opcode
+ * function to be returned and executed.
+ * Return: Nothing.
+ */
+void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 {
-	int i = 0, j = 0;
 	instruction_t opcodes[] = {
-		{"push", op_push}, {"pall", op_pall}, {"pint", op_pint},
-		{"pop", op_pop}, {"swap", op_swap}, {"add", op_add},
-		{"nop", op_nop}, {NULL, NULL}
+		{"pall", op_pall},
+		{NULL, NULL}
 	};
-	while(opcodes[i].opcode && s)
+	int i = 0;
+
+	while (opcodes[i].opcode)
 	{
-		j = 0;
-		while (opcodes[i].opcode[j] == s[j] && s[j])
-			j++;
-		if (!opcodes[i].opcode[j] && !s[j])
-		{
+		if (opcodes[i].opcode[0] == s[0] && s[0] != '\0')
 			return (opcodes[i].f);
-		}
 		i++;
 	}
 	return (NULL);
