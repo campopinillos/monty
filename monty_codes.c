@@ -12,7 +12,7 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	stack_t *node;
 	char del[] = " \n\t";
 	char *s;
-	int num, flag = 0;
+	int num, flag;
 
 	s = strtok(NULL, del);
 	if (!s)
@@ -39,6 +39,7 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	if (*stack)
 		(*stack)->prev = node;
 	*stack = node;
+	free(node);
 }
 /**
  * mop_pall - prints all the values on the stack

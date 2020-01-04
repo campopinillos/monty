@@ -8,12 +8,12 @@
  */
 int _isdigit(char *c)
 {
-	int num;
+	int i;
 
-	if (*c == 48)
-		return (1);
-	num = atoi(c);
-	if (num == 0)
-		return (0);
+	for (i = 0; c[i]; i++)
+	{
+		if (c[i] < 48 || c[i] > 57)
+			return (0);
+	}
 	return (1);
 }
