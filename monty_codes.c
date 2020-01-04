@@ -42,6 +42,22 @@ void mop_push(stack_t **stack, unsigned int n_line)
 		(*stack)->prev = node;
 	*stack = node;
 }
+
+size_t print_dlistint(const stack_t *h)
+{
+	unsigned int nodes = 0;
+
+	if (h == NULL)
+		return (nodes);
+	while (h != NULL)
+	{
+		printf("%i\n", (*h).n);
+		h = (*h).next;
+		nodes++;
+	}
+	return (nodes);
+}
+
 /**
  * mop_pall - prints all the values on the stack
  * @stack: Double pointer input
@@ -51,21 +67,9 @@ void mop_push(stack_t **stack, unsigned int n_line)
  * starting from the top of the stack.
  * Return: Nothing.
  */
-void mop_pall(stack_t **stack, unsigned int n_line)
+void mop_pall(stack_t **dlinkedlist, unsigned int n_line)
 {
-	int i = 0;
-	stack_t *tmp;
 	(void) n_line;
-	if (!stack || !*stack)
-		;
-	else
-	{
-		tmp = *stack;
-		while (tmp != NULL)
-		{
-			i++;
-			printf("%d\n", tmp->n);
-			tmp = tmp->next;
-		}
-	}
+	print_dlistint(*dlinkedlist);
 }
+
