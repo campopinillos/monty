@@ -18,7 +18,6 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	if (!s)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
-		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	if (*s == '-')
@@ -30,7 +29,6 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	if (flag == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
-		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	num = atoi(s) * sign;
@@ -38,7 +36,6 @@ void mop_push(stack_t **stack, unsigned int n_line)
 	if (!node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	node->n = num;
@@ -87,7 +84,6 @@ void mop_pint(stack_t **stack, unsigned int n_line)
 	if (tmp == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", n_line);
-		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 
@@ -121,7 +117,6 @@ void mop_pop(stack_t **stack, unsigned int n_line)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%i: can't pop an empty stack\n", n_line);
-		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	else
