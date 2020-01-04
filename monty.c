@@ -54,6 +54,7 @@ void read_file(FILE *fd, char *file_name)
 	if (!fd)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file_name);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	while (getline(&buffer, &size_buf, fd) != EOF)
@@ -69,6 +70,7 @@ void read_file(FILE *fd, char *file_name)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
 			free(buffer);
+			fclose(fd);
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
