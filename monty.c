@@ -63,6 +63,7 @@ void read_file(FILE *fd, char *file_name)
 		if (!f)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
@@ -86,6 +87,7 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		{"pall", mop_pall},
 		{"pint", mop_pint},
 		{"nop", mop_nop},
+		{"pop", mop_pop},
 		{NULL, NULL}
 	};
 	int i = 0;

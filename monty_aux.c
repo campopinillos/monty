@@ -8,12 +8,27 @@
  */
 int _isdigit(char *c)
 {
-	int num;
+	int i;
 
-	if (*c == 48)
-		return (1);
-	num = atoi(c);
-	if (num == 0)
-		return (0);
+	for (i = 0; c[i]; i++)
+	{
+		if (c[i] < 48 || c[i] > 57)
+			return (0);
+	}
 	return (1);
+}
+/**
+ * rm_head - deletes head node
+ * @head: pointer to list
+ */
+
+void rm_head(stack_t **head)
+{
+	stack_t *temp = *head, *temp_d = NULL;
+
+	temp_d = temp;
+	if ((*temp).next != NULL)
+		(*temp).next->prev = NULL;
+	*head = (*temp).next;
+	free(temp_d);
 }

@@ -10,15 +10,20 @@
 void mop_push(stack_t **stack, unsigned int n_line)
 {
 	stack_t *node;
-	char del[] = " \n\t";
+	char delim[] = " \n\t";
 	char *s;
-	int num, flag = 0;
+	int num, flag, sign = 1;
 
-	s = strtok(NULL, del);
+	s = strtok(NULL, delim);
 	if (!s)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
+	}
+	if (*s == '-')
+	{
+		sign = -1;
+		s++;
 	}
 	flag = _isdigit(s);
 	if (flag == 0)
@@ -26,7 +31,7 @@ void mop_push(stack_t **stack, unsigned int n_line)
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
 		exit(EXIT_FAILURE);
 	}
-	num = atoi(s);
+	num = atoi(s) * sign;
 	node = malloc(sizeof(stack_t));
 	if (!node)
 	{
@@ -93,4 +98,23 @@ void mop_nop(stack_t **stack, unsigned int n_line)
 {
 	(void) **stack;
 	(void) n_line;
+}
+
+/**
+ * mop_pop - removes an item from a stack
+ * @dlink: pointer to a list
+ * @n_line: line number of op command
+ */
+void mop_pop(stack_t **dlink, unsigned int n_line)
+{
+
+	if (*dlink == NULL)
+	{
+		fprintf(stderr, "L%i: can't pop an empty stack\n", n_line);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		rm_head(dlink);
+	}
 }
