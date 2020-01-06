@@ -46,3 +46,21 @@ size_t dlistint_len(const stack_t *h)
 		h = h->next;
 	return (i);
 }
+/**
+ * free_dlistint - free a dlistint_t list
+ * @head: pointer to the beginning of the linked list
+ *
+ * Return: void
+ */
+void free_dlistint(stack_t *head)
+{
+	stack_t *next;
+
+	while (head != NULL)
+	{
+		next = head->next;
+		free(head);
+		head = next;
+	}
+}
+

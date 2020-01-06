@@ -49,10 +49,11 @@ void mop_pall(stack_t **stack, unsigned int n_line);
 void mop_pint(stack_t **stack, unsigned int n_line);
 void mop_nop(stack_t **stack, unsigned int n_line);
 void mop_pop(stack_t **stack, unsigned int n_line);
-void mop_swap(stack_t **stackk, unsigned int line_num);
+void mop_swap(stack_t **stackk, unsigned int n_line);
 
 /* Aux Functions */
 int _isdigit(char *c);
 void rm_head(stack_t **head);
 size_t dlistint_len(const stack_t *h);
+void free_dlistint(stack_t *head);
 #endif

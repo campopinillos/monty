@@ -31,7 +31,6 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	read_file(fd, argv[1]);
-	fclose(fd);
 	return (EXIT_SUCCESS);
 }
 /**
@@ -51,13 +50,7 @@ void read_file(FILE *fd, char *file_name)
 	void (*f)(stack_t **stack, unsigned int line_number);
 	stack_t *stack = NULL;
 
-	if (!fd)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", file_name);
-		fclose(fd);
-		exit(EXIT_FAILURE);
-	}
-	while (getline(&buffer, &size_buf, fd) != EOF)
+	while (getline(&buffer, &size_buf, fd) != -1)
 	{
 		opcode = strtok(buffer, delim);
 		if (!opcode)
@@ -69,14 +62,14 @@ void read_file(FILE *fd, char *file_name)
 		if (!f)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", n_line, opcode);
-			free(buffer);
-			fclose(fd);
 			exit(EXIT_FAILURE);
 		}
 		f(&stack, n_line);
 		n_line++;
 	}
 	free(buffer);
+	free_dlistint(stack);
+	fclose(fd);
 }
 
 /**
