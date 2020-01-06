@@ -32,3 +32,17 @@ void rm_head(stack_t **head)
 	*head = (*temp).next;
 	free(temp_d);
 }
+/**
+ * dlistint_len - count the number of nodes in the linked list
+ * @h: pointer to the beginning of a linked list
+ *
+ * Return: number of nodes
+ */
+size_t dlistint_len(const stack_t *h)
+{
+	size_t i;
+
+	for (i = 0; h != NULL; i++)
+		h = h->next;
+	return (i);
+}
