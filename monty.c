@@ -49,6 +49,8 @@ void read_file(FILE *fd, char *file_name)
 	char *buffer = NULL, *delim = " \t\n", *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 	stack_t *stack = NULL;
+	
+	(void) file_name;
 
 	while (getline(&buffer, &size_buf, fd) != -1)
 	{

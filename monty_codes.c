@@ -57,7 +57,7 @@ void mop_push(stack_t **stack, unsigned int n_line)
 void mop_pall(stack_t **stack, unsigned int n_line)
 {
 	stack_t *tmp = *stack;
-	(void) n_line;
+	(void)n_line;
 
 	if (!stack || !*stack)
 		return;
@@ -79,7 +79,7 @@ void mop_pall(stack_t **stack, unsigned int n_line)
 void mop_pint(stack_t **stack, unsigned int n_line)
 {
 	stack_t *tmp = *stack;
-	(void) n_line;
+	(void)n_line;
 
 	if (tmp == NULL)
 	{
@@ -89,7 +89,7 @@ void mop_pint(stack_t **stack, unsigned int n_line)
 
 	else if (!stack || !*stack)
 		return;
-		printf("%i\n", tmp->n);
+	printf("%i\n", tmp->n);
 }
 
 /**
@@ -102,8 +102,8 @@ void mop_pint(stack_t **stack, unsigned int n_line)
  */
 void mop_nop(stack_t **stack, unsigned int n_line)
 {
-	(void) **stack;
-	(void) n_line;
+	(void)**stack;
+	(void)n_line;
 }
 
 /**
