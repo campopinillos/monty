@@ -10,16 +10,9 @@
  */
 int main(int argc, char **argv)
 {
-	int check_access;
 	FILE *fd;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-	check_access = access(argv[1], R_OK);
-	if (check_access == -1)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
