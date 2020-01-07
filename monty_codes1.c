@@ -38,3 +38,17 @@ void mop_add(stack_t **stack, unsigned int n_line)
 	mop_pop(stack, n_line);
 	(*stack)->n += n;
 }
+void mop_sub(stack_t **stack, unsigned int n_line)
+{
+	int n = 0;
+
+	if (dlistint_len(*stack) < 2)
+	{
+		fprintf(stderr, "L%i: can't sub, stack too short\n", n_line);
+		exit(EXIT_FAILURE);
+	}
+
+	n += (*stack)->n;
+	mop_pop(stack, n_line);
+	(*stack)->n -= n;
+}
