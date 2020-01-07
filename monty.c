@@ -47,7 +47,7 @@ void read_file(FILE *fd, char *file_name)
 	while (getline(&buffer, &size_buf, fd) != -1)
 	{
 		opcode = strtok(buffer, delim);
-		if (!opcode)
+		if (!opcode || opcode[0] == '#')
 		{
 			n_line++;
 			continue;
@@ -88,7 +88,6 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		{"div", mop_div},
 		{"mul", mop_mul},
 		{"mod", mop_mod},
-		{"#", mop_nop},
 		{NULL, NULL}
 	};
 	int i = 0;
