@@ -26,7 +26,7 @@ void mop_add(stack_t **stack, unsigned int n_line)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		fprintf(stderr, "L%i: can't swap, stack too short\n", n_line);
+		fprintf(stderr, "L%i: can't add, stack too short\n", n_line);
 		exit(EXIT_FAILURE);
 	}
 
