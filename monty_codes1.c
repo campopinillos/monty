@@ -28,7 +28,7 @@ void mop_add(stack_t **stack, unsigned int n_line)
 {
 	int n = 0;
 
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, "L%i: can't add, stack too short\n", n_line);
 		exit(EXIT_FAILURE);
