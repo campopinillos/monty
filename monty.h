@@ -50,6 +50,7 @@ void mop_pint(stack_t **stack, unsigned int n_line);
 void mop_nop(stack_t **stack, unsigned int n_line);
 void mop_pop(stack_t **stack, unsigned int n_line);
 void mop_swap(stack_t **stackk, unsigned int n_line);
+void mop_add(stack_t **stack, unsigned int n_line);
 
 /* Aux Functions */
 int _isdigit(char *c);

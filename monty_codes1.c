@@ -19,3 +19,18 @@ void mop_swap(stack_t **stackk, unsigned int n_line)
 	(*stackk)->n = y;
 	(*stackk)->next->n = x;
 }
+
+void mop_add(stack_t **stack, unsigned int n_line)
+{
+	int n = 0;
+
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	{
+		fprintf(stderr, "L%i: can't swap, stack too short\n", n_line);
+		exit(EXIT_FAILURE);
+	}
+
+	n += (*stack)->n;
+	mop_pop(stack, n_line);
+	(*stack)->n += n;
+}
