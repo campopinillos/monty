@@ -54,6 +54,7 @@ void mop_add(stack_t **stack, unsigned int n_line);
 void mop_sub(stack_t **stack, unsigned int n_line);
 void mop_div(stack_t **stack, unsigned int n_line);
 void mop_mul(stack_t **stack, unsigned int n_line);
+void mop_mod(stack_t **stack, unsigned int n_line);
 
 /* Aux Functions */
 int _isdigit(char *c);
