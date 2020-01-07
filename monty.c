@@ -85,6 +85,7 @@ void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line)
 		{"swap", mop_swap},
 		{"add", mop_add},
 		{"sub", mop_sub},
+		{"div", mop_div},
 		{NULL, NULL}
 	};
 	int i = 0;
